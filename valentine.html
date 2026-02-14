@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Untuk Sayangku Caca ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* Mencegah teks terblokir saat di-tap di HP */
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Container Kartu */
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 30px 20px;
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+            z-index: 10;
+            transition: all 0.5s ease;
+        }
+
+        /* Teks Judul */
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: #fff;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            min-height: 100px; /* Space untuk efek ngetik */
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        /* Teks Pesan Tersembunyi */
+        .message {
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: opacity 1s ease, height 1s ease;
+        }
+
+        .message.show {
+            opacity: 1;
+            height: auto;
+            margin-top: 15px;
+        }
+
+        /* Tombol */
+        button {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            animation: pulse 1.5s infinite;
+            transition: transform 0.2s;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255, 77, 109, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
+        }
+
+        /* Efek Love Melayang */
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.5rem;
+            bottom: -20px;
+            animation: floatUp linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Efek Love saat di-tap */
+        .tap-heart {
+            position: absolute;
+            color: #ff1493;
+            font-size: 1.2rem;
+            pointer-events: none;
+            animation: burst 0.8s ease-out forwards;
+            z-index: 20;
+        }
+
+        @keyframes burst {
+            0% { transform: scale(0.5) translate(0, 0); opacity: 1; }
+            100% { transform: scale(1.5) translate(var(--tx), var(--ty)); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <h1 id="titleText"></h1>
+        <div class="message" id="secretMessage">
+            Selamat Hari Valentine, kesayanganku! 💖<br><br>
+            Terima kasih sudah jadi alasan senyumku setiap hari. Kamu adalah hal terindah yang pernah terjadi di hidupku. Semoga kita bisa terus bareng-bareng ya. I love you more than words can say, Caca! 🥰
+        </div>
+        <button id="openBtn">Buka Pesan💌</button>
+    </div>
+
+    <script>
+        // 1. Efek Mesin Tik
+        const textToType = "Happy Valentine Day\nSayangku Caca ❤️";
+        const titleElement = document.getElementById('titleText');
+        let index = 0;
+
+        function typeWriter() {
+            if (index < textToType.length) {
+                if(textToType.charAt(index) === '\n') {
+                    titleElement.innerHTML += '<br>';
+                } else {
+                    titleElement.innerHTML += textToType.charAt(index);
+                }
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        
+        // Mulai ngetik setelah 500ms
+        setTimeout(typeWriter, 500);
+
+        // 2. Efek Love Melayang di Background
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.fontSize = Math.random() * 1.5 + 0.5 + 'rem';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        setInterval(createFloatingHeart, 300);
+
+        // 3. Efek Love Menyebar saat Layar disentuh/diklik
+        document.body.addEventListener('pointerdown', function(e) {
+            // Jangan buat ledakan kalau yang diklik itu tombol
+            if(e.target.tagName === 'BUTTON') return; 
+
+            for(let i = 0; i < 5; i++) {
+                createTapHeart(e.clientX, e.clientY);
+            }
+        });
+
+        function createTapHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.classList.add('tap-heart');
+            heart.innerHTML = ['💖', '💕', '✨', '❤️'][Math.floor(Math.random() * 4)];
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            
+            // Random arah ledakan
+            const tx = (Math.random() - 0.5) * 100 + 'px';
+            const ty = (Math.random() - 0.5) * 100 + 'px';
+            heart.style.setProperty('--tx', tx);
+            heart.style.setProperty('--ty', ty);
+            
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 800);
+        }
+
+        // 4. Buka Pesan Rahasia
+        const btn = document.getElementById('openBtn');
+        const msg = document.getElementById('secretMessage');
+
+        btn.addEventListener('click', () => {
+            msg.classList.add('show');
+            btn.style.display = 'none';
+
+            // Ledakan love besar di tengah layar
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    createTapHeart(centerX, centerY);
+                }, i * 20);
+            }
+        });
+    </script>
+</body>
+</html>
